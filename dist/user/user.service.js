@@ -17,9 +17,8 @@ let UserService = class UserService {
         this.prisma = prisma;
     }
     create(createUserDto) {
-        const user = Object.assign({}, createUserDto);
         return this.prisma.user.create({
-            data: user,
+            data: createUserDto,
         });
     }
     findAll() {
@@ -37,7 +36,7 @@ let UserService = class UserService {
             where: {
                 id,
             },
-            data: Object.assign({}, updateUserDto),
+            data: updateUserDto,
         });
     }
     remove(id) {

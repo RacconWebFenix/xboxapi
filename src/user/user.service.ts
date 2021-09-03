@@ -9,12 +9,8 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createUserDto: CreateUserDto) {
-    const user: User = {
-      ...createUserDto,
-    };
-
     return this.prisma.user.create({
-      data: user,
+      data: createUserDto,
     });
   }
 
@@ -35,7 +31,7 @@ export class UserService {
       where: {
         id,
       },
-      data: { ...updateUserDto },
+      data: updateUserDto,
     });
   }
 
