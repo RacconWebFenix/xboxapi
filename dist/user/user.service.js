@@ -17,19 +17,35 @@ let UserService = class UserService {
         this.prisma = prisma;
     }
     create(createUserDto) {
-        return 'This action adds a new user';
+        const user = Object.assign({}, createUserDto);
+        return this.prisma.user.create({
+            data: user,
+        });
     }
     findAll() {
-        return `This action returns all user`;
+        return this.prisma.user.findMany();
     }
     findOne(id) {
-        return `This action returns a #${id} user`;
+        return this.prisma.user.findUnique({
+            where: {
+                id,
+            },
+        });
     }
     update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
+        return this.prisma.user.update({
+            where: {
+                id,
+            },
+            data: Object.assign({}, updateUserDto),
+        });
     }
     remove(id) {
-        return `This action removes a #${id} user`;
+        return this.prisma.user.delete({
+            where: {
+                id,
+            },
+        });
     }
 };
 UserService = __decorate([
