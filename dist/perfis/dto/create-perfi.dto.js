@@ -9,41 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateUserDto = void 0;
+exports.CreatePerfiDto = void 0;
 const class_validator_1 = require("class-validator");
-const cpf_1 = require("../../helpers/cpf");
-class CreateUserDto {
+class CreatePerfiDto {
 }
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "nome", void 0);
+], CreatePerfiDto.prototype, "titulo", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsUrl)({
+        require_protocol: true,
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "sobrenome", void 0);
+], CreatePerfiDto.prototype, "imagemUrl", void 0);
 __decorate([
-    (0, class_validator_1.IsEmail)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "email", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "senha", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, cpf_1.Cpf)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "cpf", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], CreateUserDto.prototype, "admin", void 0);
-exports.CreateUserDto = CreateUserDto;
-//# sourceMappingURL=create-user.dto.js.map
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], CreatePerfiDto.prototype, "usuarioId", void 0);
+exports.CreatePerfiDto = CreatePerfiDto;
+//# sourceMappingURL=create-perfi.dto.js.map

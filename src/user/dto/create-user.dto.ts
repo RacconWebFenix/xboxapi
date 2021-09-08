@@ -6,7 +6,6 @@ export class CreateUserDto implements User {
   @IsString()
   @IsNotEmpty()
   nome: string;
-  @IsNotEmpty()
   @IsString()
   @IsNotEmpty()
   sobrenome: string;

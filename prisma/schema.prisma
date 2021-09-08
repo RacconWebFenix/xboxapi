@@ -2,21 +2,30 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id   Int    @id @default(autoincrement())
-  nome String
+model Usuarios {
+  id        Int      @id @default(autoincrement())
+  nome      String
   sobrenome String
-  email String
-  senha String
-  cpf String
-  admin Boolean
+  email     String
+  senha     String
+  cpf       String
+  admin     Boolean
+  perfis    Perfis[]
+}
+
+model Perfis {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  imagemUrl String
+  usuario   Usuarios @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
 }

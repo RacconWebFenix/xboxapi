@@ -9,55 +9,83 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.PerfisService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-let UserService = class UserService {
+let PerfisService = class PerfisService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(createUserDto) {
-        return this.prisma.usuarios.create({
-            data: createUserDto,
+    create(createPerfiDto) {
+        return this.prisma.perfis.create({
+            data: createPerfiDto,
+            include: {
+                usuario: {
+                    select: {
+                        nome: true,
+                    },
+                },
+            },
         });
     }
     findAll() {
-        return this.prisma.usuarios.findMany({
+        return this.prisma.perfis.findMany({
             include: {
-                perfis: {
+                usuario: {
                     select: {
-                        titulo: true,
+                        nome: true,
                     },
                 },
             },
         });
     }
     findOne(id) {
-        return this.prisma.usuarios.findUnique({
+        return this.prisma.perfis.findUnique({
             where: {
                 id,
+            },
+            include: {
+                usuario: {
+                    select: {
+                        nome: true,
+                    },
+                },
             },
         });
     }
-    update(id, updateUserDto) {
-        return this.prisma.usuarios.update({
+    update(id, updatePerfiDto) {
+        return this.prisma.perfis.update({
             where: {
                 id,
             },
-            data: updateUserDto,
+            data: updatePerfiDto,
+            include: {
+                usuario: {
+                    select: {
+                        nome: true,
+                    },
+                },
+            },
         });
     }
     remove(id) {
-        return this.prisma.usuarios.delete({
+        return this.prisma.perfis.delete({
             where: {
                 id,
+            },
+            include: {
+                usuario: {
+                    select: {
+                        nome: true,
+                    },
+                },
             },
         });
     }
 };
-UserService = __decorate([
+PerfisService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+], PerfisService);
+exports.PerfisService = PerfisService;
+//# sourceMappingURL=perfis.service.js.map

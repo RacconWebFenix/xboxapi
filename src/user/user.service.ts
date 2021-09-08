@@ -2,24 +2,31 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createUserDto: CreateUserDto) {
-    return this.prisma.user.create({
+    return this.prisma.usuarios.create({
       data: createUserDto,
     });
   }
 
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.usuarios.findMany({
+      include: {
+        perfis: {
+          select: {
+            titulo: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: number) {
-    return this.prisma.user.findUnique({
+    return this.prisma.usuarios.findUnique({
       where: {
         id,
       },
@@ -27,7 +34,7 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return this.prisma.user.update({
+    return this.prisma.usuarios.update({
       where: {
         id,
       },
@@ -36,7 +43,7 @@ export class UserService {
   }
 
   remove(id: number) {
-    return this.prisma.user.delete({
+    return this.prisma.usuarios.delete({
       where: {
         id,
       },
