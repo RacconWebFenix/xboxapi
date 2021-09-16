@@ -5,5 +5,6 @@ export declare class CreateUserDto implements User {
     email: string;
     senha: string;
     cpf: string;
+    imagemUrl: string;
     admin: boolean;
 }

@@ -3,14 +3,29 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+// Bcrypt
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createUserDto: CreateUserDto) {
-    return this.prisma.usuarios.create({
-      data: createUserDto,
-    });
+  async create(createUserDto: CreateUserDto) {
+    const data = {
+      ...createUserDto,
+      senha: await bcrypt.hash(createUserDto.senha, 10),
+    };
+
+    const createdUsuario = await this.prisma.usuarios.create({ data });
+
+    return {
+      ...createdUsuario,
+      senha: undefined,
+    };
+  }
+
+  findByEmail(email: string) {
+    return this.prisma.usuarios.findUnique({ where: { email } });
   }
 
   findAll() {
@@ -25,7 +40,7 @@ export class UserService {
     });
   }
 
-  findOne(id: number) {
+  findById(id: number) {
     return this.prisma.usuarios.findUnique({
       where: {
         id,

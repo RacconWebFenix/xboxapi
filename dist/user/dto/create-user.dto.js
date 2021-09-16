@@ -26,12 +26,15 @@ __decorate([
 ], CreateUserDto.prototype, "sobrenome", void 0);
 __decorate([
     (0, class_validator_1.IsEmail)(),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.MinLength)(4),
+    (0, class_validator_1.MaxLength)(20),
+    (0, class_validator_1.Matches)(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+        message: 'password too weak',
+    }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "senha", void 0);
 __decorate([
@@ -40,6 +43,13 @@ __decorate([
     (0, cpf_1.Cpf)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "cpf", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUrl)({
+        require_protocol: true,
+    }),
+    __metadata("design:type", String)
+], CreateUserDto.prototype, "imagemUrl", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsBoolean)(),
