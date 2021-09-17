@@ -54,11 +54,19 @@ let PerfisService = class PerfisService {
         });
     }
     update(id, updatePerfiDto) {
+        const jogosIds = updatePerfiDto.jogosIds;
+        const jogosDisconnectIds = updatePerfiDto.jogosDisconnectIds;
+        delete updatePerfiDto.jogosIds;
+        delete updatePerfiDto.jogosDisconnectIds;
+        const data = Object.assign(Object.assign({}, updatePerfiDto), { jogos: {
+                connect: jogosIds.map((id) => ({ id })),
+                disconnect: jogosDisconnectIds.map((id) => ({ id })),
+            } });
         return this.prisma.perfis.update({
             where: {
                 id,
             },
-            data: updatePerfiDto,
+            data,
             include: {
                 usuario: {
                     select: {

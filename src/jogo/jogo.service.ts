@@ -53,7 +53,6 @@ export class JogoService {
     delete updateJogoDto.perfisIds;
 
     delete updateJogoDto.perfisDisconnectIds;
-    delete updateJogoDto.perfisIds;
 
     const data = {
       ...updateJogoDto,

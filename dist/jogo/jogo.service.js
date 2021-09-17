@@ -53,7 +53,6 @@ let JogoService = class JogoService {
         const perfisDisconnectIds = updateJogoDto.perfisDisconnectIds;
         delete updateJogoDto.perfisIds;
         delete updateJogoDto.perfisDisconnectIds;
-        delete updateJogoDto.perfisIds;
         const data = Object.assign(Object.assign({}, updateJogoDto), { perfis: {
                 connect: perfisIds.map((id) => ({ id })),
                 disconnect: perfisDisconnectIds.map((id) => ({ id })),

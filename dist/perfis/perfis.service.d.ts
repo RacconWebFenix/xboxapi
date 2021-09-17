@@ -19,11 +19,7 @@ export declare class PerfisService {
             nome: string;
         };
     }>;
-    update(id: number, updatePerfiDto: UpdatePerfiDto): import(".prisma/client").Prisma.Prisma__PerfisClient<import(".prisma/client").Perfis & {
-        usuario: {
-            nome: string;
-        };
-    }>;
+    update(id: number, updatePerfiDto: UpdatePerfiDto): import(".prisma/client").Prisma.Prisma__PerfisClient<import(".prisma/client").Perfis>;
     remove(id: number): import(".prisma/client").Prisma.Prisma__PerfisClient<import(".prisma/client").Perfis & {
         usuario: {
             nome: string;

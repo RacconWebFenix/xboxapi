@@ -22,11 +22,11 @@ model Usuarios {
 
 model Perfis {
   id        Int      @id @default(autoincrement())
-  titulo    String   
+  titulo    String   @unique
   imagemUrl String
   usuarioId Int
   usuario   Usuarios @relation(fields: [usuarioId], references: [id])
-  Jogos     Jogo[]
+  jogos     Jogo[]
 
 }
 
