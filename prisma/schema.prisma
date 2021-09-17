@@ -22,7 +22,7 @@ model Usuarios {
 
 model Perfis {
   id        Int      @id @default(autoincrement())
-  titulo    String
+  titulo    String   
   imagemUrl String
   usuarioId Int
   usuario   Usuarios @relation(fields: [usuarioId], references: [id])
@@ -32,7 +32,7 @@ model Perfis {
 
 model Jogo {
   id        Int      @id @default(autoincrement())
-  titulo    String
+  titulo    String   @unique
   capa      String
   descricao String
   ano       String
@@ -45,6 +45,6 @@ model Jogo {
 
 model Genero {
   id    Int    @id @default(autoincrement())
-  nome  String
+  nome  String @unique
   jogos Jogo[]
 }
