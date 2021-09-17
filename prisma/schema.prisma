@@ -26,4 +26,25 @@ model Perfis {
   imagemUrl String
   usuarioId Int
   usuario   Usuarios @relation(fields: [usuarioId], references: [id])
+  Jogos     Jogo[]
+
+}
+
+model Jogo {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  capa      String
+  descricao String
+  ano       String
+  IMDB      Int
+  trailer   String
+  gameplay  String
+  perfis    Perfis[]
+  generos   Genero[]
+}
+
+model Genero {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  jogos Jogo[]
 }
