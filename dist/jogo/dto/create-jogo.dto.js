@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateJogoDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
+const create_genero_dto_1 = require("../../genero/dto/create-genero.dto");
 const create_perfi_dto_1 = require("../../perfis/dto/create-perfi.dto");
 class CreateJogoDto {
 }
@@ -64,5 +65,16 @@ __decorate([
     (0, class_validator_1.IsNumber)({}, { each: true }),
     __metadata("design:type", Array)
 ], CreateJogoDto.prototype, "perfisIds", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => create_genero_dto_1.CreateGeneroDto),
+    __metadata("design:type", Array)
+], CreateJogoDto.prototype, "generos", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)({}, { each: true }),
+    __metadata("design:type", Array)
+], CreateJogoDto.prototype, "generosIds", void 0);
 exports.CreateJogoDto = CreateJogoDto;
 //# sourceMappingURL=create-jogo.dto.js.map

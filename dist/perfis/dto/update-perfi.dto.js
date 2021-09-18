@@ -13,14 +13,14 @@ exports.UpdatePerfiDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
-const update_jogo_dto_1 = require("../../jogo/dto/update-jogo.dto");
+const create_jogo_dto_1 = require("../../jogo/dto/create-jogo.dto");
 const create_perfi_dto_1 = require("./create-perfi.dto");
 class UpdatePerfiDto extends (0, mapped_types_1.PartialType)(create_perfi_dto_1.CreatePerfiDto) {
 }
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.ValidateNested)({ each: true }),
-    (0, class_transformer_1.Type)(() => update_jogo_dto_1.UpdateJogoDto),
+    (0, class_transformer_1.Type)(() => create_jogo_dto_1.CreateJogoDto),
     __metadata("design:type", Array)
 ], UpdatePerfiDto.prototype, "jogos", void 0);
 __decorate([

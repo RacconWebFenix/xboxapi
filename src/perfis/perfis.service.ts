@@ -1,3 +1,4 @@
+import { Prisma } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePerfiDto } from './dto/create-perfi.dto';
@@ -27,6 +28,7 @@ export class PerfisService {
             nome: true,
           },
         },
+        jogos: true,
       },
     });
   }
@@ -42,6 +44,7 @@ export class PerfisService {
             nome: true,
           },
         },
+        jogos: true,
       },
     });
   }
@@ -52,7 +55,7 @@ export class PerfisService {
     delete updatePerfiDto.jogosIds;
     delete updatePerfiDto.jogosDisconnectIds;
 
-    const data = {
+    const data: Prisma.PerfisUpdateInput = {
       ...updatePerfiDto,
       jogos: {
         connect: jogosIds.map((id) => ({ id })),
@@ -69,6 +72,11 @@ export class PerfisService {
         usuario: {
           select: {
             nome: true,
+          },
+        },
+        jogos: {
+          select: {
+            titulo: true,
           },
         },
       },

@@ -1,14 +1,14 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
 import { IsNumber, IsOptional, ValidateNested } from 'class-validator';
-import { UpdateJogoDto } from 'src/jogo/dto/update-jogo.dto';
+import { CreateJogoDto } from 'src/jogo/dto/create-jogo.dto';
 import { CreatePerfiDto } from './create-perfi.dto';
 
 export class UpdatePerfiDto extends PartialType(CreatePerfiDto) {
   @IsOptional()
   @ValidateNested({ each: true })
-  @Type(() => UpdateJogoDto)
-  jogos?: UpdateJogoDto[];
+  @Type(() => CreateJogoDto)
+  jogos?: CreateJogoDto[];
 
   @IsOptional()
   @IsNumber({}, { each: true })

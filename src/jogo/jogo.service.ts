@@ -9,8 +9,11 @@ export class JogoService {
   constructor(private readonly prisma: PrismaService) {}
   create(createJogoDto: CreateJogoDto) {
     const perfisIds = createJogoDto.perfisIds;
-
     delete createJogoDto.perfisIds;
+
+    const generosIds = createJogoDto.generosIds;
+    delete createJogoDto.generosIds;
+
     const data: Prisma.JogoCreateInput = {
       ...createJogoDto,
       perfis: {
@@ -18,10 +21,15 @@ export class JogoService {
           id,
         })),
       },
+      generos: {
+        connect: generosIds?.map((id) => ({
+          id,
+        })),
+      },
     };
     return this.prisma.jogo.create({
       data,
-      include: { perfis: true },
+      include: { perfis: true, generos: true },
     });
   }
 
@@ -29,6 +37,7 @@ export class JogoService {
     return this.prisma.jogo.findMany({
       include: {
         perfis: true,
+        generos: true,
       },
     });
   }
@@ -42,6 +51,7 @@ export class JogoService {
             titulo: true,
           },
         },
+        generos: true,
       },
     });
   }
@@ -49,22 +59,27 @@ export class JogoService {
   update(id: number, updateJogoDto: UpdateJogoDto) {
     const perfisIds = updateJogoDto.perfisIds;
     const perfisDisconnectIds = updateJogoDto.perfisDisconnectIds;
-
     delete updateJogoDto.perfisIds;
-
     delete updateJogoDto.perfisDisconnectIds;
-
+    const generosIds = updateJogoDto.generosIds;
+    const generosDisconnectIds = updateJogoDto.generosDisconnectIds;
+    delete updateJogoDto.generosIds;
+    delete updateJogoDto.generosDisconnectIds;
     const data = {
       ...updateJogoDto,
       perfis: {
         connect: perfisIds.map((id) => ({ id })),
         disconnect: perfisDisconnectIds.map((id) => ({ id })),
       },
+      generos: {
+        connect: generosIds?.map((id) => ({ id })),
+        disconnect: generosDisconnectIds.map((id) => ({ id })),
+      },
     };
     return this.prisma.jogo.update({
       where: { id },
       data,
-      include: { perfis: true },
+      include: { perfis: true, generos: true },
     });
   }
 

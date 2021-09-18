@@ -1,8 +1,8 @@
-import { UpdatePerfiDto } from '../dto/update-perfi.dto';
+import { CreateJogoDto } from 'src/jogo/dto/create-jogo.dto';
 
 export class Perfi {
   id?: number;
   titulo: string;
   imagemUrl: string;
-  jogos?: UpdatePerfiDto[];
+  jogos?: CreateJogoDto[];
 }

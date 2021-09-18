@@ -32,7 +32,7 @@ model Perfis {
 
 model Jogo {
   id        Int      @id @default(autoincrement())
-  titulo    String   @unique
+  titulo    String
   capa      String
   descricao String
   ano       String
@@ -45,6 +45,6 @@ model Jogo {
 
 model Genero {
   id    Int    @id @default(autoincrement())
-  nome  String @unique
+  nome  String
   jogos Jogo[]
 }

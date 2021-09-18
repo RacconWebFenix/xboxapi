@@ -20,5 +20,10 @@ __decorate([
     (0, class_validator_1.IsNumber)({}, { each: true }),
     __metadata("design:type", Array)
 ], UpdateJogoDto.prototype, "perfisDisconnectIds", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)({}, { each: true }),
+    __metadata("design:type", Array)
+], UpdateJogoDto.prototype, "generosDisconnectIds", void 0);
 exports.UpdateJogoDto = UpdateJogoDto;
 //# sourceMappingURL=update-jogo.dto.js.map

@@ -7,6 +7,7 @@ import {
   IsUrl,
   ValidateNested,
 } from 'class-validator';
+import { CreateGeneroDto } from 'src/genero/dto/create-genero.dto';
 import { CreatePerfiDto } from 'src/perfis/dto/create-perfi.dto';
 import { Jogo } from '../entities/jogo.entity';
 
@@ -35,13 +36,20 @@ export class CreateJogoDto implements Jogo {
     require_protocol: true,
   })
   gameplay: string;
-
+  //conecao com perfil
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => CreatePerfiDto)
   perfis?: CreatePerfiDto[];
-
   @IsOptional()
   @IsNumber({}, { each: true })
   perfisIds: number[];
+  //conexao com generos
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => CreateGeneroDto)
+  generos?: CreateGeneroDto[];
+  @IsOptional()
+  @IsNumber({}, { each: true })
+  generosIds: number[];
 }

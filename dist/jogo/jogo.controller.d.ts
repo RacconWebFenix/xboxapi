@@ -6,17 +6,21 @@ export declare class JogoController {
     constructor(jogoService: JogoService);
     create(createJogoDto: CreateJogoDto): import(".prisma/client").Prisma.Prisma__JogoClient<import(".prisma/client").Jogo & {
         perfis: import(".prisma/client").Perfis[];
+        generos: import(".prisma/client").Genero[];
     }>;
     findAll(): import(".prisma/client").PrismaPromise<(import(".prisma/client").Jogo & {
         perfis: import(".prisma/client").Perfis[];
+        generos: import(".prisma/client").Genero[];
     })[]>;
     findOne(id: string): import(".prisma/client").Prisma.Prisma__JogoClient<import(".prisma/client").Jogo & {
         perfis: {
             titulo: string;
         }[];
+        generos: import(".prisma/client").Genero[];
     }>;
     update(id: string, updateJogoDto: UpdateJogoDto): import(".prisma/client").Prisma.Prisma__JogoClient<import(".prisma/client").Jogo & {
         perfis: import(".prisma/client").Perfis[];
+        generos: import(".prisma/client").Genero[];
     }>;
     remove(id: string): import(".prisma/client").Prisma.Prisma__JogoClient<import(".prisma/client").Jogo>;
 }

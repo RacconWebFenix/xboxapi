@@ -6,4 +6,7 @@ export class UpdateJogoDto extends PartialType(CreateJogoDto) {
   @IsOptional()
   @IsNumber({}, { each: true })
   perfisDisconnectIds: number[];
+  @IsOptional()
+  @IsNumber({}, { each: true })
+  generosDisconnectIds: number[];
 }

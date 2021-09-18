@@ -8,35 +8,63 @@ import { UpdateGeneroDto } from './dto/update-genero.dto';
 export class GeneroService {
   constructor(private readonly prisma: PrismaService) {}
   create(createGeneroDto: CreateGeneroDto) {
-    // // const jogosIds = createGeneroDto.jogosIds;
-    // // delete createGeneroDto.jogosIds;
-    // // const data: Prisma.GeneroCreateInput = {
-    // //   ...createGeneroDto,
-    // //   jogos: {
-    // //     connect: jogosIds?.map((id) => {
-    // //       id;
-    // //     }),
-    // //   },
-    // // };
-    // return this.prisma.genero.create({
-    //   data,
-    //   include: { jogos: true },
-    // });
+    const jogosIds = createGeneroDto.jogosIds;
+    delete createGeneroDto.jogosIds;
+    const data: Prisma.GeneroCreateInput = {
+      ...createGeneroDto,
+      jogos: {
+        connect: jogosIds.map((id) => ({ id })),
+      },
+    };
+    return this.prisma.genero.create({
+      data,
+      include: { jogos: true },
+    });
   }
 
   findAll() {
-    return `This action returns all genero`;
+    return this.prisma.genero.findMany({
+      include: {
+        jogos: true,
+      },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} genero`;
+    return this.prisma.genero.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        jogos: true,
+      },
+    });
   }
 
   update(id: number, updateGeneroDto: UpdateGeneroDto) {
-    return `This action updates a #${id} genero`;
+    const jogosIds = updateGeneroDto.jogosIds;
+    const jogosDisconnectIds = updateGeneroDto.jogosDisconnectIds;
+    delete updateGeneroDto.jogosIds;
+    delete updateGeneroDto.jogosDisconnectIds;
+    const data: Prisma.GeneroUpdateInput = {
+      ...updateGeneroDto,
+      jogos: {
+        connect: jogosIds?.map((id) => ({ id })),
+        disconnect: jogosDisconnectIds?.map((id) => ({ id })),
+      },
+    };
+    return this.prisma.genero.update({
+      where: { id },
+      data,
+      include: { jogos: true },
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} genero`;
+    return this.prisma.genero.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

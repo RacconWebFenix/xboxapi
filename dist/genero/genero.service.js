@@ -17,18 +17,54 @@ let GeneroService = class GeneroService {
         this.prisma = prisma;
     }
     create(createGeneroDto) {
+        const jogosIds = createGeneroDto.jogosIds;
+        delete createGeneroDto.jogosIds;
+        const data = Object.assign(Object.assign({}, createGeneroDto), { jogos: {
+                connect: jogosIds.map((id) => ({ id })),
+            } });
+        return this.prisma.genero.create({
+            data,
+            include: { jogos: true },
+        });
     }
     findAll() {
-        return `This action returns all genero`;
+        return this.prisma.genero.findMany({
+            include: {
+                jogos: true,
+            },
+        });
     }
     findOne(id) {
-        return `This action returns a #${id} genero`;
+        return this.prisma.genero.findUnique({
+            where: {
+                id,
+            },
+            include: {
+                jogos: true,
+            },
+        });
     }
     update(id, updateGeneroDto) {
-        return `This action updates a #${id} genero`;
+        const jogosIds = updateGeneroDto.jogosIds;
+        const jogosDisconnectIds = updateGeneroDto.jogosDisconnectIds;
+        delete updateGeneroDto.jogosIds;
+        delete updateGeneroDto.jogosDisconnectIds;
+        const data = Object.assign(Object.assign({}, updateGeneroDto), { jogos: {
+                connect: jogosIds === null || jogosIds === void 0 ? void 0 : jogosIds.map((id) => ({ id })),
+                disconnect: jogosDisconnectIds === null || jogosDisconnectIds === void 0 ? void 0 : jogosDisconnectIds.map((id) => ({ id })),
+            } });
+        return this.prisma.genero.update({
+            where: { id },
+            data,
+            include: { jogos: true },
+        });
     }
     remove(id) {
-        return `This action removes a #${id} genero`;
+        return this.prisma.genero.delete({
+            where: {
+                id,
+            },
+        });
     }
 };
 GeneroService = __decorate([

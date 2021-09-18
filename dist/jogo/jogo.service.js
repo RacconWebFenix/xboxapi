@@ -19,20 +19,27 @@ let JogoService = class JogoService {
     create(createJogoDto) {
         const perfisIds = createJogoDto.perfisIds;
         delete createJogoDto.perfisIds;
+        const generosIds = createJogoDto.generosIds;
+        delete createJogoDto.generosIds;
         const data = Object.assign(Object.assign({}, createJogoDto), { perfis: {
                 connect: perfisIds === null || perfisIds === void 0 ? void 0 : perfisIds.map((id) => ({
+                    id,
+                })),
+            }, generos: {
+                connect: generosIds === null || generosIds === void 0 ? void 0 : generosIds.map((id) => ({
                     id,
                 })),
             } });
         return this.prisma.jogo.create({
             data,
-            include: { perfis: true },
+            include: { perfis: true, generos: true },
         });
     }
     findAll() {
         return this.prisma.jogo.findMany({
             include: {
                 perfis: true,
+                generos: true,
             },
         });
     }
@@ -45,6 +52,7 @@ let JogoService = class JogoService {
                         titulo: true,
                     },
                 },
+                generos: true,
             },
         });
     }
@@ -53,14 +61,21 @@ let JogoService = class JogoService {
         const perfisDisconnectIds = updateJogoDto.perfisDisconnectIds;
         delete updateJogoDto.perfisIds;
         delete updateJogoDto.perfisDisconnectIds;
+        const generosIds = updateJogoDto.generosIds;
+        const generosDisconnectIds = updateJogoDto.generosDisconnectIds;
+        delete updateJogoDto.generosIds;
+        delete updateJogoDto.generosDisconnectIds;
         const data = Object.assign(Object.assign({}, updateJogoDto), { perfis: {
                 connect: perfisIds.map((id) => ({ id })),
                 disconnect: perfisDisconnectIds.map((id) => ({ id })),
+            }, generos: {
+                connect: generosIds === null || generosIds === void 0 ? void 0 : generosIds.map((id) => ({ id })),
+                disconnect: generosDisconnectIds.map((id) => ({ id })),
             } });
         return this.prisma.jogo.update({
             where: { id },
             data,
-            include: { perfis: true },
+            include: { perfis: true, generos: true },
         });
     }
     remove(id) {

@@ -36,6 +36,7 @@ let PerfisService = class PerfisService {
                         nome: true,
                     },
                 },
+                jogos: true,
             },
         });
     }
@@ -50,6 +51,7 @@ let PerfisService = class PerfisService {
                         nome: true,
                     },
                 },
+                jogos: true,
             },
         });
     }
@@ -71,6 +73,11 @@ let PerfisService = class PerfisService {
                 usuario: {
                     select: {
                         nome: true,
+                    },
+                },
+                jogos: {
+                    select: {
+                        titulo: true,
                     },
                 },
             },
