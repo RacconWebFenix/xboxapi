@@ -10,24 +10,24 @@ export declare class PerfisController {
         };
     }>;
     findAll(): import(".prisma/client").PrismaPromise<(import(".prisma/client").Perfis & {
-        jogos: import(".prisma/client").Jogo[];
         usuario: {
             nome: string;
         };
+        jogos: import(".prisma/client").Jogo[];
     })[]>;
     findOne(id: string): import(".prisma/client").Prisma.Prisma__PerfisClient<import(".prisma/client").Perfis & {
-        jogos: import(".prisma/client").Jogo[];
         usuario: {
             nome: string;
         };
+        jogos: import(".prisma/client").Jogo[];
     }>;
     update(id: string, updatePerfiDto: UpdatePerfiDto): import(".prisma/client").Prisma.Prisma__PerfisClient<import(".prisma/client").Perfis & {
+        usuario: {
+            nome: string;
+        };
         jogos: {
             titulo: string;
         }[];
-        usuario: {
-            nome: string;
-        };
     }>;
     remove(id: string): import(".prisma/client").Prisma.Prisma__PerfisClient<import(".prisma/client").Perfis & {
         usuario: {
