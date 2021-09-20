@@ -12,7 +12,7 @@ async function bootstrap() {
         transform: true,
     }));
     app.useGlobalInterceptors(new unauthorized_interceptor_1.UnauthorizedInterceptor());
-    await app.listen(3000);
+    await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
